@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <gazebo>
+        <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+            <!-- Wheel Joints -->
+            <left_joint>base_left_wheel_joint</left_joint>
+            <right_joint>base_right_wheel_joint</right_joint>
+
+            <!-- Kinematics -->
+            <wheel_separation>0.35</wheel_separation>
+            <wheel_radius>0.05</wheel_radius>
+
+            <!-- Limits -->
+            <max_linear_acceleration>10.0</max_linear_acceleration>
+
+            <!-- Topic & TF Settings -->
+            <topic>cmd_vel</topic>
+            <odom_topic>odom</odom_topic>
+            <frame_id>odom</frame_id>
+            <child_frame_id>base_link</child_frame_id>
+            <odom_publisher_frequency>30</odom_publisher_frequency>
+        </plugin>
+
+        <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+            <publish_link_pose>true</publish_link_pose>
+            <use_pose_vector_msg>true</use_pose_vector_msg>
+            <static_publisher>true</static_publisher>
+            <static_update_frequency>1</static_update_frequency>
+        </plugin>
+
+        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+        <!-- Force the topic to match the standard ROS topic -->
+        <topic>joint_states</topic>
+        <!-- List all the moving joints you want to track -->
+        <joint_name>base_left_wheel_joint</joint_name>
+        <joint_name>base_right_wheel_joint</joint_name>
+    </plugin>
+
+    </gazebo>
+
+
+</robot>

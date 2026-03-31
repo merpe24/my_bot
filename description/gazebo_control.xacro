@@ -29,12 +29,12 @@
         </plugin>
 
         <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-        <!-- Force the topic to match the standard ROS topic -->
-        <topic>joint_states</topic>
-        <!-- List all the moving joints you want to track -->
-        <joint_name>base_left_wheel_joint</joint_name>
-        <joint_name>base_right_wheel_joint</joint_name>
-    </plugin>
+            <!-- Force the topic to match the standard ROS topic -->
+            <topic>joint_states</topic>
+            <!-- List all the moving joints you want to track -->
+            <joint_name>base_left_wheel_joint</joint_name>
+            <joint_name>base_right_wheel_joint</joint_name>
+        </plugin>
 
     </gazebo>
 

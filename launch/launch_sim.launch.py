@@ -51,7 +51,8 @@ def generate_launch_description():
             '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
             '/model/my_bot/tf@tf2_msgs/msg/TFMessage@gz.msgs.Pose_V',
             '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock',
-            '/joint_states@sensor_msgs/msg/JointState@gz.msgs.Model'
+            '/joint_states@sensor_msgs/msg/JointState@gz.msgs.Model',
+            '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'
         ],
         remappings=[
             ('/model/my_bot/tf', '/tf')

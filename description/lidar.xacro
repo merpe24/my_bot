@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <link name="lidar_frame">
+    <link name="laser_frame">
         <visual>
             <geometry>
                 <cylinder radius="0.05" length="0.04" />
@@ -20,25 +20,28 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <joint name="lidar_joint" type="fixed">
+    <joint name="laser_joint" type="fixed">
         <parent link="chassis" />
-        <child link="lidar_frame" />
+        <child link="laser_frame" />
         <origin xyz="0.1 0 0.175" rpy="0 0 0" />
     </joint>
 
+    
 
-    <gazebo reference="lidar_frame">
+    <gazebo reference="laser_joint">
+        <preserveFixedJoint>true</preserveFixedJoint>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="laser_frame">
         <material>Gazebo/Red</material>
 
-        <sensor name="laser" type="gpu_lidar">
+        <sensor name="gpu_lidar" type="gpu_lidar">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
-            <update_rate>10</update_rate>
-            <!-- Harmonic uses this topic tag to broadcast internally -->
             <topic>scan</topic>
-            <!-- Force the frame ID so RViz knows where the data comes from -->
-            <gz_frame_id>lidar_frame</gz_frame_id>
-            
+            <update_rate>10</update_rate>
+            <gz_frame_id>laser_frame</gz_frame_id> 
+
             <lidar>
                 <scan>
                     <horizontal>
@@ -47,11 +50,21 @@
                         <max_angle>3.14</max_angle>
                     </horizontal>
                 </scan>
+
                 <range>
                     <min>0.3</min>
                     <max>12</max>
                 </range>
+
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.001</stddev>
+                </noise>
             </lidar>
+
+            <always_on>1</always_on>
+            <visualize>1</visualize>
         </sensor>
     </gazebo>
 

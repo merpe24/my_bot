@@ -36,7 +36,7 @@
             <geometry>
                 <box size="0.4 0.3 0.15" />
             </geometry>
-            <origin xyz="0.15 0 0.075" />
+            <origin xyz="0.2 0 0.075" />
             <material name="white" />
         </visual>
 

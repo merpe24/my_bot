@@ -2,23 +2,24 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <gazebo>
         <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-            <!-- Wheel Joints -->
+
+            <!-- Wheel Information -->
             <left_joint>base_left_wheel_joint</left_joint>
             <right_joint>base_right_wheel_joint</right_joint>
-
-            <!-- Kinematics -->
             <wheel_separation>0.35</wheel_separation>
             <wheel_radius>0.05</wheel_radius>
+
+            <!-- Input -->
+            <topic>cmd_vel</topic>
 
             <!-- Limits -->
             <max_linear_acceleration>10.0</max_linear_acceleration>
 
-            <!-- Topic & TF Settings -->
-            <topic>cmd_vel</topic>
+            <!-- Output -->
             <odom_topic>odom</odom_topic>
             <frame_id>odom</frame_id>
             <child_frame_id>base_link</child_frame_id>
-            <odom_publisher_frequency>30</odom_publisher_frequency>
+            <odom_publish_frequency>30</odom_publish_frequency>
         </plugin>
 
         <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
@@ -29,11 +30,13 @@
         </plugin>
 
         <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-            <!-- Force the topic to match the standard ROS topic -->
             <topic>joint_states</topic>
-            <!-- List all the moving joints you want to track -->
             <joint_name>base_left_wheel_joint</joint_name>
             <joint_name>base_right_wheel_joint</joint_name>
+        </plugin>
+
+        <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+            <render_engine>ogre2</render_engine>
         </plugin>
 
     </gazebo>

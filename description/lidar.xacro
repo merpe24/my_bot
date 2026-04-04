@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <link name="laser_frame">
+    <link name="lidar_link">
         <visual>
             <geometry>
                 <cylinder radius="0.05" length="0.04" />
@@ -20,27 +20,21 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <joint name="laser_joint" type="fixed">
-        <parent link="chassis" />
-        <child link="laser_frame" />
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="lidar_link" />
         <origin xyz="0.1 0 0.175" rpy="0 0 0" />
     </joint>
 
-    
 
-    <gazebo reference="laser_joint">
-        <preserveFixedJoint>true</preserveFixedJoint>
-        <disableFixedJointLumping>true</disableFixedJointLumping>
-    </gazebo>
-
-    <gazebo reference="laser_frame">
+    <gazebo reference="lidar_link">
         <material>Gazebo/Red</material>
 
         <sensor name="gpu_lidar" type="gpu_lidar">
             <pose>0 0 0 0 0 0</pose>
             <topic>scan</topic>
             <update_rate>10</update_rate>
-            <gz_frame_id>laser_frame</gz_frame_id> 
+            <gz_frame_id>lidar_link</gz_frame_id> 
 
             <lidar>
                 <scan>

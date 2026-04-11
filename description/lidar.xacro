@@ -57,9 +57,13 @@
                 </noise>
             </lidar>
 
-            <always_on>1</always_on>
-            <visualize>1</visualize>
+            <always_on>true</always_on>
+            <visualize>true</visualize>
         </sensor>
+    </gazebo>
+
+    <gazebo reference="lidar_joint">
+        <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
 
 </robot>

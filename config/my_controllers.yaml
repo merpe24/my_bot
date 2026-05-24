@@ -14,6 +14,7 @@ diff_cont:
     right_wheel_names: ['base_right_wheel_joint']
     wheel_separation: 0.35
     wheel_radius: 0.05
+    use_stamped_vel: false
 
 joint_broad:
   ros__parameters:

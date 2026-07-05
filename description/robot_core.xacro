@@ -167,7 +167,7 @@
     <joint name="base_caster_wheel_joint" type="fixed">
         <parent link="base_link" />
         <child link="caster_wheel" />
-        <origin xyz="0.16 0 -0.05" />
+        <origin xyz="0.16 0 0" />
     </joint>
 
 </robot>

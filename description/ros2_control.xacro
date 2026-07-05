@@ -1,9 +1,31 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
-    <ros2_control name="GazeboSystem" type="system">
+
+    <!-- True for Gz_sim, False for real hardware.
+         Passed in from the launch file via: xacro ... sim_mode:=true|false -->
+    <xacro:arg name="sim_mode" default="false"/>
+
+    <ros2_control name="RobotSystem" type="system">
+
         <hardware>
-            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            <xacro:if value="$(arg sim_mode)">
+                <!-- SIMULATION -->
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            </xacro:if>
+            <xacro:unless value="$(arg sim_mode)">
+                <!-- REAL HARDWARE -->
+                <plugin>diffdrive_arduino/DiffDriveArduinoHardware</plugin>
+                <param name="left_wheel_name">base_left_wheel_joint</param>
+                <param name="right_wheel_name">base_right_wheel_joint</param>
+                <param name="loop_rate">30</param>
+                <param name="device">/dev/ttyUSB0</param>
+                <param name="baud_rate">57600</param>
+                <param name="timeout_ms">1000</param>
+                <!-- TODO: CALIBRATE. Counts reported by the Arduino for one full
+                     output-shaft revolution (quadrature counts x gear ratio) for the
+                     JGB37-520. Drive one wheel exactly 1 rev by hand, read `e`, put that here. -->
+                <param name="enc_counts_per_rev">3436</param>
+            </xacro:unless>
         </hardware>
 
         <joint name="base_left_wheel_joint">
@@ -23,13 +45,18 @@
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
+
     </ros2_control>
 
-    <gazebo>
-        <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
-            <parameters>$(find my_bot)/config/my_controllers.yaml</parameters>
-        </plugin>
-    </gazebo>
-
+    <!-- The gz_ros2_control controller-manager plugin only exists in simulation.
+         On the real robot the controller_manager is a normal ros2_control_node
+         started from launch_robot.launch.py. -->
+    <xacro:if value="$(arg sim_mode)">
+        <gazebo>
+            <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+                <parameters>$(find my_bot)/config/my_controllers.yaml</parameters>
+            </plugin>
+        </gazebo>
+    </xacro:if>
 
 </robot>

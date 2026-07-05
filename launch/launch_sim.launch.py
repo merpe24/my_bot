@@ -12,10 +12,10 @@ def generate_launch_description():
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory(package_name),'launch','rsp.launch.py'
-        )]), launch_arguments={'use_sim_time': 'true'}.items()
+        )]), launch_arguments={'use_sim_time': 'true', 'sim_mode': 'true'}.items()
     )
 
-    world_path = os.path.join(get_package_share_directory(package_name), 'worlds', 'obstacles.world')
+    world_path = os.path.join(get_package_share_directory(package_name), 'worlds', 'room.world')
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(

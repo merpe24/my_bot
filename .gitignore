@@ -1,0 +1,11 @@
+# Agent context file — not part of the package
+CLAUDE.md
+
+# colcon artifacts (should never live inside a package)
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc

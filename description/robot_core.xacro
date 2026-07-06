@@ -79,6 +79,8 @@
 
     <gazebo reference="left_wheel">
         <material>Gazebo/Blue</material>
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
     </gazebo>
 
     <!-- RIGHT WHEEL LINK -->
@@ -104,6 +106,8 @@
 
     <gazebo reference="right_wheel">
         <material>Gazebo/Blue</material>
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
     </gazebo>
 
     <!-- CASTER WHEEL LINK-->
@@ -129,8 +133,8 @@
 
     <gazebo reference="caster_wheel">
         <material>Gazebo/Black</material>
-        <mu1 value="0.001"/>
-        <mu2 value="0.001"/>
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
     </gazebo>
 
 

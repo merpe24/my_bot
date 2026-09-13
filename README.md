@@ -2,9 +2,7 @@
 
 Autonomous differential-drive robot · ROS 2 Jazzy · Gazebo Harmonic · Nav2
 
-<p align="center">
-  <img src="docs/robot.jpg" width="320" alt="The physical robot: Raspberry Pi 4, Arduino Nano, L298N motor driver and battery pack in its chassis">
-</p>
+![UV Robot](https://drive.google.com/file/d/1iAN8yb8nrteYSOJHL-DxIor30ZmfoTSj/view?usp=sharing)
 
 A three-wheeled mobile robot that maps a room with SLAM and navigates it autonomously with Nav2. One package covers the robot model, the Gazebo simulation and the hardware bring-up, and a single launch argument switches between the simulated and the physical robot.
 
